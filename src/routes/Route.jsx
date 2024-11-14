@@ -1,10 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "../layout/Home";
 
 const route = createBrowserRouter([
     {
         path:"/",
-        element:<Home></Home>
+        element:<Home></Home>,
+        children:[
+            {
+                path:"",
+                element: <Navigate to={"/category/01"}></Navigate>
+            },
+            {
+                path:"/category/:id",
+                element: <h2>This Is Category</h2>
+            }
+        ]
     },
     {
         path:"/news",
