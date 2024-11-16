@@ -1,16 +1,27 @@
 import { Link, NavLink } from "react-router-dom";
 import userIcon from "../assets/user.png";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  
+
   const links = (
     <>
-      <li to="/"><NavLink to="/">Home</NavLink></li>
-      <li to="/"><NavLink to="career">Career</NavLink></li>
-      <li to="/"><NavLink to="/about">About</NavLink></li>
-      
+      <li to="/">
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li to="/">
+        <NavLink to="career">Career</NavLink>
+      </li>
+      <li to="/">
+        <NavLink to="/about">About</NavLink>
+      </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -36,14 +47,32 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+        <div>
+          {user ? <h4 className="font-semibold">Hi! {user.name} </h4> : ""}
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end gap-3">
-        <img src={userIcon} alt="" />
-        <Link to="/login" className="btn rounded-sm btn-neutral w-32">Login</Link>
-      </div>
+
+      {user ? (
+        <div className="navbar-end gap-3">
+          <img src={userIcon} alt="" />
+          <button
+            onClick={logOut}
+            className="btn rounded-sm btn-neutral w-32"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="navbar-end gap-3">
+          <img src={userIcon} alt="" />
+          <Link to="/auth/login" className="btn rounded-sm btn-neutral w-32">
+            Login
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

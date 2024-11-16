@@ -10,7 +10,7 @@ const LeftNavbar = () => {
       .then((data) => setCategories(data.data.news_category));
   }, []);
   return (
-    <div>
+    <div className="flex flex-col">
       <h2 className="font-semibold mb-3">
         All Category ({categories.length}){" "}
       </h2>
