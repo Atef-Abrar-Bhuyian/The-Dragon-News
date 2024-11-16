@@ -1,6 +1,7 @@
 import React from "react";
 import { FaStar, FaEye } from "react-icons/fa";
 import { BsShare } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const NewsCard = (props = {}) => {
   const { news } = props || {};
@@ -31,9 +32,9 @@ const NewsCard = (props = {}) => {
         <h1 className="font-bold text-xl mb-2">{news.title}</h1>
         <p className="text-gray-700 text-base">
           {news.details.substring(0, 100)}...
-          <a href="#" className="text-blue-500">
+          <Link to={`/news/${news._id}`} className="text-blue-500">
             Read More
-          </a>
+          </Link>
         </p>
         <div className="mt-4 flex items-center">
           <div className="flex text-yellow-500">
